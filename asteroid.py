@@ -1,18 +1,9 @@
 import pygame
 import random
 from circleshape import CircleShape
-from constants import ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS
+from constants import ASTEROID_MIN_RADIUS
 """
 Asteroid module: defines the Asteroid class and related logic.
-"""
-
-import pygame
-import random
-from circleshape import CircleShape
-from constants import ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS
-
-"""
-Asteroid class: represents an asteroid in the game.
 """
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
