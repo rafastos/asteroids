@@ -21,6 +21,10 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # Score setup
+    score = 0
+    font = pygame.font.Font(None, 36)
+
     # Create game objects and groups
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     updatable = pygame.sprite.Group()
@@ -53,13 +57,25 @@ def main():
                 if a.is_colliding(s):
                     a.split()
                     s.kill()
+                    score += 10
             if a.is_colliding(player):
-                print("Game over!")
-                exit(0)
+                player.lives -= 1
+                player.reset()
+                if player.lives <= 0:
+                    print("Game over!")
+                    print(f"Final Score: {score}")
+                    exit(0)
 
         # Draw all drawable objects
         for d in drawable:
             d.draw(screen)
+
+        # Draw score
+        score_surface = font.render(f"Score: {score}", True, (255, 255, 255))
+        screen.blit(score_surface, (10, 10))
+
+        lives_surface = font.render(f"Lives: {player.lives}", True, (255, 255, 255))
+        screen.blit(lives_surface, (10, 50))
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000  # Delta time in seconds.
